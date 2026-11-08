@@ -28,7 +28,13 @@ export async function openWindowsKeySetup() {
     const child = spawn(powershell(), args('Setup'), { windowsHide: true, env: childEnvironment(), stdio: 'ignore' });
     setupProcess = child;
     child.once('error', () => { setupProcess = null; reject(new Error('WINDOWS_KEY_UNAVAILABLE')); });
-    child.once('exit', () => { setupProcess = null; });
+    child.once('exit', code => {
+      setupProcess = null;
+      if (code !== 0 && process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+        console.error('YouTube setup could not finish. Run it in your own Windows account.');
+        process.exitCode = 1;
+      }
+    });
     child.once('spawn', () => resolve({ opened: true }));
   });
 }

@@ -16,3 +16,4 @@ poc/thumbnails/
 .publish-*/
 *.dpapi
 .npmrc
+.mytube-local.json

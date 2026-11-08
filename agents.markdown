@@ -31,13 +31,11 @@ Install Node.js 22 or newer, clone/download the repository into a stable private
 folder, and open PowerShell there:
 
 ```powershell
-npm.cmd ci --ignore-scripts --no-audit --no-fund
-npm.cmd run extension:build
-npm.cmd run key:setup
+npm.cmd run setup
 ```
 
 The native Windows dialog has a masked field. Paste the key and click **Encrypt and
-save**. Only **Saved with Windows protection** confirms storage; merely opening
+save**. Only **Key saved** confirms storage; merely opening
 that window does not save a key or validate it with Google.
 
 Windows DPAPI CurrentUser encrypts the key in
@@ -46,7 +44,7 @@ The connector decrypts it in memory for Google requests. It is not sent to ChatG
 or saved in the browser. No additional password is needed. Malware running under
 the same user account can still access it.
 
-With the connector running, settings **YouTube key ? Windows protection** opens
+With the connector running, settings **Connect YouTube** opens
 the same dialog. Source precedence is explicit `MYTUBE_YOUTUBE_API_KEY` environment
 override, then Windows-protected storage, then the optional development `.secrets`
 fallback. Existing plaintext copies are neither migrated nor deleted automatically.
@@ -59,13 +57,24 @@ select `dist/brave`. This historical directory name is also the Chrome package.
 Copy its public 32-letter extension ID, then start the connector:
 
 ```powershell
-$env:MYTUBE_EXTENSION_ID = 'YOUR_32_LETTER_EXTENSION_ID'
-npm.cmd run connector
+npm.cmd start
 ```
 
-Keep this terminal open. The environment setting lasts for that terminal session;
-set it again when launching from another terminal. The connector accepts that
-exact extension ID, not arbitrary websites or extensions.
+Keep this terminal open. The first start asks for the extension ID and stores only
+that public ID in ignored .mytube-local.json. Later starts reuse it. Use
+npm start -- --configure to change it after moving/reinstalling the extension.
+An explicit MYTUBE_EXTENSION_ID environment variable overrides the saved value.
+The connector still accepts exactly one extension ID, never arbitrary origins.
+
+Setup installs dependencies, builds the extension, and opens the native key window.
+Saving automatically applies Windows protection; there is no encryption decision.
+If the window is cancelled, a key has not been saved. Run npm run key:setup or use
+Connect YouTube in settings to reopen it. Node.js and loading the unpacked extension
+remain manual prerequisites. The Google Cloud steps are also shown in the window.
+
+The lower-level npm run connector command remains available for development;
+it uses MYTUBE_EXTENSION_ID or the existing development default, not the saved
+npm start settings.
 
 Normal discovery does not require a Google OAuth client file. **Subscriptions**
 is optional and requires separate Google read-only OAuth configuration and consent.
@@ -115,6 +124,8 @@ of preferences after reloading. Offline tests cannot establish these live result
 
 | Command | Purpose |
 | --- | --- |
+| `npm.cmd run setup` | Install dependencies, build and open guided key setup |
+| `npm.cmd start` | Remember the extension ID once and start the connector |
 | `npm.cmd test` | Build and run current product checks without historical datasets |
 | `npm.cmd run release:check` | Validate the publication allowlist and common credential patterns |
 | `npm.cmd run extension:build` | Build packages without claiming tests passed |

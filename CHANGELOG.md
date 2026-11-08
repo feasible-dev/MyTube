@@ -1,5 +1,12 @@
 # MyTube release notes
 
+## Guided setup: 0.8.42
+
+`npm run setup` installs dependencies, builds the extension and opens a guided
+YouTube key window with a Google Cloud link and key-creation steps. Save key
+automatically uses Windows protection. `npm start` asks for the extension ID once
+and remembers it locally; no repeated environment-variable setup is required.
+
 ## Repository preparation: 0.8.41
 
 Clean Chromium builds now enable normal discovery without a Google OAuth client

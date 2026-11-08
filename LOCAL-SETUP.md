@@ -1,7 +1,7 @@
 # Recommended on Windows: protected key
 
-Run `npm.cmd run key:setup`, or use **YouTube key ? Windows protection** in settings.
-Paste into the native masked window and click **Encrypt and save**. See
+Run `npm.cmd run key:setup`, or use **Connect YouTube** in settings.
+Paste into the native masked window and click **Save key**. See
 [Windows storage](WINDOWS-KEY-STORAGE.md) for precedence, limitations and migration.
 The instructions below describe the optional plaintext development fallback.
 

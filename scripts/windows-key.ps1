@@ -39,27 +39,37 @@ try {
     Add-Type -AssemblyName System.Windows.Forms
     Add-Type -AssemblyName System.Drawing
     $form = New-Object Windows.Forms.Form
-    $form.Text = 'MyTube - Windows-protected YouTube key'
-    $form.ClientSize = New-Object Drawing.Size(560, 235)
+    $form.Text = 'MyTube - Connect YouTube'
+    $form.ClientSize = New-Object Drawing.Size(600, 410)
     $form.StartPosition = 'CenterScreen'
     $form.FormBorderStyle = 'FixedDialog'
     $form.MaximizeBox = $false
     $label = New-Object Windows.Forms.Label
-    $label.Text = "Paste your own YouTube API key. Windows encrypts it for this account.`nNo key is sent to ChatGPT or saved in the browser."
-    $label.SetBounds(20,20,520,45)
+    $label.Text = "Connect YouTube once. Paste your key below; MyTube saves it securely."
+    $label.SetBounds(20,20,560,35)
+    $help = New-Object Windows.Forms.Label
+    $help.Text = "Need a key? In Google Cloud:`n`n1. Create or select a project.`n2. APIs & Services > Library: enable YouTube Data API v3.`n3. Credentials > Create credentials > API key.`n4. Restrict key > API restrictions: choose YouTube Data API v3.`n5. Copy the key, come back here, and paste it below."
+    $help.SetBounds(20,65,560,145)
+    $cloud = New-Object Windows.Forms.LinkLabel
+    $cloud.Text = 'Open Google Cloud'
+    $cloud.SetBounds(20,215,250,25)
+    $cloud.Add_LinkClicked({
+        try { Start-Process -FilePath 'https://console.cloud.google.com/apis/credentials' }
+        catch { $status.Text = 'Open console.cloud.google.com in your browser.' }
+    })
     $input = New-Object Windows.Forms.TextBox
     $input.UseSystemPasswordChar = $true
     $input.MaxLength = 256
-    $input.SetBounds(20,75,520,28)
+    $input.SetBounds(20,250,560,28)
     $status = New-Object Windows.Forms.Label
-    $status.SetBounds(20,115,520,50)
-    $status.Text = 'Saving replaces the protected key. Existing .secrets files are unchanged.'
+    $status.SetBounds(20,290,560,45)
+    $status.Text = 'Your key stays on this PC. Never paste it into a chat.'
     $save = New-Object Windows.Forms.Button
-    $save.Text = 'Encrypt and save'
-    $save.SetBounds(290,180,150,32)
+    $save.Text = 'Save key'
+    $save.SetBounds(330,355,150,32)
     $cancel = New-Object Windows.Forms.Button
     $cancel.Text = 'Cancel'
-    $cancel.SetBounds(450,180,90,32)
+    $cancel.SetBounds(490,355,90,32)
     $cancel.Add_Click({ $form.Close() })
     $save.Add_Click({
         try {
@@ -83,12 +93,12 @@ try {
                 if (Test-Path -LiteralPath $path) { [IO.File]::Replace($temporary, $path, $null) }
                 else { [IO.File]::Move($temporary, $path) }
             } finally { if (Test-Path -LiteralPath $temporary) { Remove-Item -LiteralPath $temporary } }
-            $status.Text = 'Saved with Windows protection. You can close this window and search.'
+            $status.Text = 'Key saved. You can close this window and use MyTube.'
             $save.Enabled = $false
             $cancel.Text = 'Close'
         } catch { $input.Clear(); $status.Text = 'Could not save securely. Your previous key was preserved.' }
     })
-    $form.Controls.AddRange(@($label,$input,$status,$save,$cancel))
+    $form.Controls.AddRange(@($label,$help,$cloud,$input,$status,$save,$cancel))
     $form.AcceptButton = $save
     $form.CancelButton = $cancel
     try { [void]$form.ShowDialog() } finally { $input.Clear(); $form.Dispose() }

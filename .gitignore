@@ -39,6 +39,7 @@ ui-output.txt
 .publish-*/
 *.dpapi
 .npmrc
+.mytube-local.json
 
 # Local experiment narratives; product documentation lives in README/CHANGELOG.
 GO_NO_GO.md

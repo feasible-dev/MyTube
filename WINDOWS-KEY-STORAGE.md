@@ -1,8 +1,8 @@
 # Windows-protected YouTube key
 
 Implemented in 0.8.40. Run `npm.cmd run key:setup` from your Windows account,
-or click **YouTube key ? Windows protection** in MyTube settings with the connector
-running. Paste into the native masked window, then **Encrypt and save**. The
+or click **Connect YouTube** in MyTube settings with the connector
+running. Paste into the native masked window, then **Save key**. The
 window confirms success; opening it does not mean a key was saved or validated by Google.
 
 ## Storage and transport

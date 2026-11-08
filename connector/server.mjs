@@ -119,8 +119,8 @@ export async function startConnector({ port = PORT, planner = planWithChatGPT, s
   await new Promise((resolve, reject) => { server.once('error', reject); server.listen(port, '127.0.0.1', resolve); });
   return { port: server.address().port, async close() { closing = true; active?.abort(); for (const job of youtubeJobs) job.abort(); await new Promise(resolve => server.close(resolve)); await idle; await signOut(); } };
 }
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  startConnector({ extensionId: process.env.MYTUBE_EXTENSION_ID ?? EXTENSION_ID }).then(connector => {
+export function runConnector(extensionId = process.env.MYTUBE_EXTENSION_ID ?? EXTENSION_ID) {
+  return startConnector({ extensionId }).then(connector => {
     console.log('MyTube connector is ready on this PC. Keep this process running while using MyTube.');
     console.log('Submitting a description sends it to OpenAI and can use your ChatGPT plan allowance.');
     console.log('YouTube key: Windows-protected storage (npm run key:setup), or explicit development environment/.secrets fallback. Credentials are never returned to the extension or logged.');
@@ -133,3 +133,4 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     process.on('SIGINT', stop); process.on('SIGTERM', stop);
   }).catch(() => { console.error('Connector could not start. Its local port may already be in use.'); process.exitCode = 1; });
 }
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) runConnector();
