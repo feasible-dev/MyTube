@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 // alone to decide what can leave the workstation.
 export async function releaseFiles(root = new URL('../', import.meta.url)) {
   const files = ['.gitignore', '.npmignore', 'package.json', 'package-lock.json',
-    'README.md', 'AGENTS.md', 'SECURITY.md', 'CHANGELOG.md', 'LOCAL-SETUP.md', 'WINDOWS-KEY-STORAGE.md'];
+    'README.md', 'AGENTS.md', 'agents.markdown', 'SECURITY.md', 'CHANGELOG.md', 'LOCAL-SETUP.md', 'WINDOWS-KEY-STORAGE.md'];
   const historicalDocs = new Set(['connector/HISTORY.md', 'extension/CHANGELOG.md']);
   async function walk(folder) {
     for (const entry of await readdir(new URL(folder + '/', root), { withFileTypes: true })) {
