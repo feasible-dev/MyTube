@@ -1,0 +1,160 @@
+{
+  "data_kind": "SYNTHETIC_ONLY",
+  "purpose": "Invented IDs and ratings for arithmetic tests; no real video or personal preference data.",
+  "lists": [
+    {
+      "intent": "synthetic_topic",
+      "method": "search_baseline",
+      "item_ids": [
+        "fixture-01",
+        "fixture-02",
+        "fixture-03",
+        "fixture-04",
+        "fixture-05",
+        "fixture-06",
+        "fixture-07",
+        "fixture-08",
+        "fixture-09",
+        "fixture-10"
+      ]
+    },
+    {
+      "intent": "synthetic_topic",
+      "method": "keyword_baseline",
+      "item_ids": [
+        "fixture-06",
+        "fixture-07",
+        "fixture-08",
+        "fixture-09",
+        "fixture-10",
+        "fixture-11",
+        "fixture-12",
+        "fixture-13",
+        "fixture-14",
+        "fixture-15"
+      ]
+    }
+  ],
+  "ratings": [
+    {
+      "item_id": "fixture-01",
+      "relevant": 1,
+      "want_to_watch": 1,
+      "already_known": 1,
+      "perceived_quality": 2,
+      "short": 0
+    },
+    {
+      "item_id": "fixture-02",
+      "relevant": 1,
+      "want_to_watch": 1,
+      "already_known": 1,
+      "perceived_quality": 2,
+      "short": 0
+    },
+    {
+      "item_id": "fixture-03",
+      "relevant": 1,
+      "want_to_watch": 1,
+      "already_known": 1,
+      "perceived_quality": 2,
+      "short": 0
+    },
+    {
+      "item_id": "fixture-04",
+      "relevant": 1,
+      "want_to_watch": 1,
+      "already_known": 1,
+      "perceived_quality": 2,
+      "short": 0
+    },
+    {
+      "item_id": "fixture-05",
+      "relevant": 1,
+      "want_to_watch": 1,
+      "already_known": 1,
+      "perceived_quality": 2,
+      "short": 0
+    },
+    {
+      "item_id": "fixture-06",
+      "relevant": 1,
+      "want_to_watch": 0,
+      "already_known": 0,
+      "perceived_quality": 1,
+      "short": 0
+    },
+    {
+      "item_id": "fixture-07",
+      "relevant": 1,
+      "want_to_watch": 0,
+      "already_known": 0,
+      "perceived_quality": 1,
+      "short": 0
+    },
+    {
+      "item_id": "fixture-08",
+      "relevant": 0,
+      "want_to_watch": 0,
+      "already_known": 0,
+      "perceived_quality": 1,
+      "short": 0
+    },
+    {
+      "item_id": "fixture-09",
+      "relevant": 0,
+      "want_to_watch": 0,
+      "already_known": 0,
+      "perceived_quality": 1,
+      "short": 0
+    },
+    {
+      "item_id": "fixture-10",
+      "relevant": 0,
+      "want_to_watch": 0,
+      "already_known": 0,
+      "perceived_quality": 1,
+      "short": 0
+    },
+    {
+      "item_id": "fixture-11",
+      "relevant": 1,
+      "want_to_watch": 1,
+      "already_known": 0,
+      "perceived_quality": 0,
+      "short": 0
+    },
+    {
+      "item_id": "fixture-12",
+      "relevant": 1,
+      "want_to_watch": 1,
+      "already_known": 0,
+      "perceived_quality": 0,
+      "short": 0
+    },
+    {
+      "item_id": "fixture-13",
+      "relevant": 1,
+      "want_to_watch": 0,
+      "already_known": 0,
+      "perceived_quality": 0,
+      "short": 0
+    },
+    {
+      "item_id": "fixture-14",
+      "relevant": 1,
+      "want_to_watch": 0,
+      "already_known": 0,
+      "perceived_quality": 0,
+      "short": 0
+    },
+    {
+      "item_id": "fixture-15",
+      "relevant": 1,
+      "want_to_watch": 0,
+      "already_known": 0,
+      "perceived_quality": 0,
+      "short": 1
+    }
+  ]
+}

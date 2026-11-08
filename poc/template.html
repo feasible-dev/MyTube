@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<!--CSP-->
+<title>MyTube</title>
+<!--STYLE-->
+</head>
+<body>
+<a class="skip" href="#collection">Skip to discoveries</a>
+<header class="topbar">
+  <a href="#" class="brand" aria-label="MyTube home"><span class="brand-icon" aria-hidden="true">m<span>↗</span></span>myTube<span class="beta">LOCAL PREVIEW</span></a>
+  <nav aria-label="Collection views"><button id="past-searches-button" class="nav-button" aria-haspopup="dialog">Past searches</button><button id="languages-button" class="nav-button" aria-haspopup="dialog">Video languages: <span id="video-language-value">English</span></button><button id="saved-tab" class="nav-button" aria-pressed="false">Saved <span id="saved-count">0</span></button></nav>
+
+</header>
+<main>
+  <nav class="feed-tabs" aria-label="Browse videos"><button id="home-tab" class="outline-button" aria-pressed="true">For you</button><button id="search-tab" class="outline-button" hidden>Last search</button><button id="subscriptions-tab" class="outline-button" aria-pressed="false">Subscriptions</button></nav>
+  <p id="history-storage-warning" role="alert" hidden>History could not be saved. Device storage may be full or unavailable.</p>
+  <section class="intention-panel" aria-label="Current viewing intention">
+    <div class="search-controls">
+    <h1 id="current-topic" class="intention">NASA · Challenger · Engineering failures</h1>
+    <div class="topic-actions"><span id="search-invitation" hidden>Tell us what you feel like watching.</span><button id="new-search" class="primary-button">New search</button><button id="settings-button" class="icon-button settings-button" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 3v5m0 4v9M12 3v11m0 4v3M19 3v3m0 4v11"/><path d="M2 8h6v4H2zM9 14h6v4H9zM16 6h6v4h-6z"/></svg></button></div>
+    </div>
+    <p id="interpreted-request" class="settings-note" hidden></p>
+    <div id="connection-status" class="connection-status" hidden><span id="connection-message" role="status"></span><button id="cancel-connection" class="subtle-button">Cancel</button></div>
+  </section>
+
+  <section class="collection" id="collection" aria-labelledby="collection-title">
+    <div class="collection-heading"><h2 id="collection-title">Videos <span id="result-count" class="total-count">27</span></h2><p id="collection-note" hidden class="collection-note">YouTube · Collected Nov 7, 2026</p></div>
+    <div class="collection-context"><p id="context-line" class="sr-only"></p></div>
+    <div id="streams" class="streams"></div>
+    <p id="status" class="sr-only" role="status" aria-live="polite"></p>
+  </section>
+
+</main>
+<dialog id="request-dialog" aria-labelledby="request-title">
+  <div class="dialog-top"><h2 id="request-title">Advanced · Search details</h2><button id="close-request" class="icon-button" aria-label="Close request">&times;</button></div>
+  <p class="request-label">Text sent to ChatGPT</p>
+  <div id="original-request" class="original-request"></div>
+  <div class="query-actions"><button id="edit-request" class="primary-button">Edit and search again</button></div>
+  <h3>Queries and results by column</h3>
+  <div id="generated-searches"></div>
+</dialog>
+<dialog id="settings-dialog" aria-labelledby="settings-title">
+  <div class="dialog-top"><h2 id="settings-title">Viewing settings</h2><button id="close-settings" class="icon-button" aria-label="Close settings">×</button></div>
+<p class="settings-note">For your next search.</p>
+<div class="preference-axes">
+<div class="preference-row"><span class="axis-topic" title="Distance of unexpected connections in Jokers. On your topic stays focused on your request."><span>Originality</span><span class="axis-symbol" aria-hidden="true">✦</span></span><span class="axis-left">Nearby</span><div class="five-level-control"><input id="pref-originality" type="range" min="0" max="100" step="25" value="50" aria-label="Originality: nearby connections to wildcards" aria-describedby="originality-help"><div class="level-ticks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div></div><span class="axis-right">Wildcards</span><span class="sr-only" id="originality-help">Nearby to surprising connections in the Jokers column. The first column stays on your subject.</span></div>
+<div class="preference-row"><span class="axis-topic" title="Made for YouTube versus lectures, hearings, archives and other recordings."><span>Origin</span><svg class="axis-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m10 8 6 4-6 4z"/></svg></span><span class="axis-left" id="origin-left">YouTube</span><div class="five-level-control"><input id="pref-origin" type="range" min="0" max="100" step="25" value="50" aria-label="Origin: YouTube to Recordings" aria-describedby="origin-help"><div class="level-ticks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div></div><span class="axis-right" id="origin-right">Recordings</span><span class="sr-only" id="origin-help">Made for YouTube versus lectures, hearings, archives and other recordings.</span></div>
+<div class="preference-row"><span class="axis-topic" title="Masculine-oriented versus feminine-oriented editorial interests."><span>Interests</span><span class="axis-symbol" aria-hidden="true">&#9794;&#9792;</span></span><span class="axis-left" id="audience-left">Masculine</span><div class="five-level-control"><input id="pref-audience" type="range" min="0" max="100" step="25" value="50" aria-label="Interests: Masculine to Feminine" aria-describedby="audience-help"><div class="level-ticks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div></div><span class="axis-right" id="audience-right">Feminine</span><span class="sr-only" id="audience-help">Masculine-oriented versus feminine-oriented editorial interests.</span></div>
+<div class="preference-row"><span class="axis-topic" title="Light entertainment versus detailed, specialized material."><span>Depth</span><svg class="axis-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v15M3 4c4-1 6 0 9 2 3-2 5-3 9-2v14c-4-1-6 0-9 2-3-2-5-3-9-2z"/></svg></span><span class="axis-left" id="depth-left">Easy viewing</span><div class="five-level-control"><input id="pref-depth" type="range" min="0" max="100" step="25" value="50" aria-label="Depth: Easy viewing to Specialist" aria-describedby="depth-help"><div class="level-ticks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div></div><span class="axis-right" id="depth-right">Specialist</span><span class="sr-only" id="depth-help">Light entertainment versus detailed, specialized material.</span></div>
+<div class="preference-row"><span class="axis-topic" title="Mainstream versus alternative and counter-mainstream perspectives."><span>Viewpoint</span><svg class="axis-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m16 8-3 5-5 3 3-5z"/></svg></span><span class="axis-left" id="perspective-left">Mainstream</span><div class="five-level-control"><input id="pref-perspective" type="range" min="0" max="100" step="25" value="50" aria-label="Viewpoint: Mainstream to Alternative" aria-describedby="perspective-help"><div class="level-ticks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div></div><span class="axis-right" id="perspective-right">Alternative</span><span class="sr-only" id="perspective-help">Mainstream versus alternative and counter-mainstream perspectives.</span></div>
+<div class="preference-row"><span class="axis-topic" title="Left-wing versus right-wing political perspectives."><span>Politics</span><svg class="axis-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18m-5 0h10M4 7h16M6 7l-3 7h6zm12 0-3 7h6z"/></svg></span><span class="axis-left" id="politics-left">Left</span><div class="five-level-control"><input id="pref-politics" type="range" min="0" max="100" step="25" value="50" aria-label="Politics: Left to Right" aria-describedby="politics-help"><div class="level-ticks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div></div><span class="axis-right" id="politics-right">Right</span><span class="sr-only" id="politics-help">Left-wing versus right-wing political perspectives.</span></div>
+<div class="preference-row"><span class="axis-topic" title="Upload date, not original recording date."><span>Upload date</span><svg class="axis-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg></span><span class="axis-left" id="recency-left">Older</span><div class="five-level-control"><input id="pref-recency" type="range" min="0" max="100" step="25" value="50" aria-label="Upload date: Older to Recent" aria-describedby="recency-help"><div class="level-ticks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div></div><span class="axis-right" id="recency-right">Recent</span><span class="sr-only" id="recency-help">Upload date, not original recording date.</span></div>
+<div class="preference-row"><span class="axis-topic" title="View counts influence ranking, not a quality score."><span>Audience</span><svg class="axis-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3m1-16a3 3 0 0 1 0 6m3 10v-3a6 6 0 0 0-2-4"/></svg></span><span class="axis-left" id="popularity-left">Less seen</span><div class="five-level-control"><input id="pref-popularity" type="range" min="0" max="100" step="25" value="50" aria-label="Audience: Less seen to Popular" aria-describedby="popularity-help"><div class="level-ticks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div></div><span class="axis-right" id="popularity-right">Popular</span><span class="sr-only" id="popularity-help">View counts influence ranking, not a quality score.</span></div>
+</div>
+  <fieldset class="duration-setting"><legend class="sr-only">Video length</legend>
+    <div class="preference-row duration-row"><span class="axis-topic" title="Also filters current results."><span>Length</span><svg class="axis-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg></span><output class="axis-left" id="min-duration-value" for="min-duration">20 min</output>
+    <div class="dual-range" id="duration-track"><input id="min-duration" aria-label="Minimum length" type="range" min="1" max="360" step="1" value="20"><input id="max-duration" aria-label="Maximum length" type="range" min="1" max="360" step="1" value="120"></div>
+    <output class="axis-right" id="max-duration-value" for="max-duration">120 min</output></div>
+  </fieldset>
+  <div class="history-setting"><label class="remember-history"><input type="checkbox" id="remember-interests" checked> Remember past searches on this device</label><p class="settings-note">Keep all search requests and discoveries on this device to build your recommendations. Turning this off clears saved history on this device. You will be asked to confirm.</p></div>
+  <details class="advanced-settings"><summary>Search details & tools</summary>
+<button id="blocked-channels-button" class="subtle-button" aria-haspopup="dialog">Blocked channels</button><button id="history-button" class="subtle-button" aria-haspopup="dialog">Manage history</button><button id="review-request" class="outline-button" hidden>Advanced · Search details</button><button id="about-button" class="subtle-button">About</button><button id="privacy-button" class="text-button">Privacy & sources</button>
+    <label class="settings-filter" for="search">Filter titles or channels</label><input id="search" type="search" maxlength="150" placeholder="Filter these results...">
+    <span id="hidden-count"></span><button id="reset" class="outline-button">Reset view</button>
+    <div id="method-switch" class="method-switch" role="group" aria-label="Selection method"><button id="diversified" class="selected" aria-pressed="true">Diversified</button><button id="search_baseline" aria-pressed="false">Reference order</button></div>
+<button id="ai-button" class="outline-button" aria-expanded="false" aria-controls="ai-panel">AI search drafts</button>  <section id="ai-panel" class="ai-panel" hidden aria-label="Saved ChatGPT search directions"></section>
+  <div class="session-setting"><button id="youtube-key-setup" type="button">YouTube key · Windows protection</button><p id="youtube-key-status" role="status"></p></div>
+  <div class="session-setting"><button id="signout-chatgpt" class="text-button">Sign out of ChatGPT</button><p id="session-status" role="status"></p></div>
+    <p class="settings-note">Viewing controls apply to this session. Personal home and saved picks stay on this device when enabled.</p>
+  </details>
+  <div class="query-actions settings-actions"><button id="reset-preferences" class="text-button">Defaults</button><button id="settings-search" class="outline-button">Search again</button><button id="done-settings" class="primary-button">Done</button></div>
+
+</dialog>
+<dialog id="languages-dialog" aria-labelledby="languages-title">
+  <div class="dialog-top"><h2 id="languages-title">Video languages</h2><button id="close-languages" class="icon-button" aria-label="Close video languages">&times;</button></div>
+  <p class="settings-note">Choose the languages of your next videos. English is the default.</p>
+  <fieldset class="language-setting"><legend>Languages</legend><div id="language-picker"><p id="language-summary">English</p><div id="language-options" class="language-options"></div>
+    <details><summary>More languages</summary><div id="more-languages" class="language-options"></div></details>
+    <p class="settings-note" id="language-note">English by default. Videos with unknown audio language may appear.</p></div>
+  </fieldset>
+  <div class="query-actions"><button id="done-languages" class="primary-button">Done</button></div>
+</dialog>
+<dialog id="forget-history-dialog" aria-labelledby="forget-history-title" aria-describedby="forget-history-warning">
+  <div class="dialog-top"><h2 id="forget-history-title">Are you sure?</h2></div>
+  <p id="forget-history-warning">This deletes past searches, your last search text and results, cached videos, saved videos and hidden-video choices from this device. This cannot be undone.</p>
+  <div class="query-actions"><button id="cancel-forget-history" class="outline-button" autofocus>Cancel</button><button id="confirm-forget-history" class="danger-button">Yes, clear</button></div>
+</dialog>
+<dialog id="past-searches-dialog" aria-labelledby="past-searches-title">
+  <div class="dialog-top"><h2 id="past-searches-title">Past searches</h2><button id="close-past-searches" class="icon-button" aria-label="Close past searches">&times;</button></div>
+  <div id="past-searches-videos" class="past-searches-grid"></div>
+</dialog>
+<dialog id="blocked-channels-dialog" aria-labelledby="blocked-channels-title">
+  <div class="dialog-top"><h2 id="blocked-channels-title">Blocked channels</h2><button id="close-blocked-channels" class="icon-button" aria-label="Close blocked channels">&times;</button></div>
+  <p>Hidden from new results, saved videos and past searches. This list stays on this device through updates and clearing history.</p>
+  <p class="settings-note">Old results without a channel ID are matched by channel name.</p>
+  <div id="blocked-channels-list"></div>
+  <a id="export-blocked-channels" class="outline-button" download="mytube-blocked-channels.json">Export JSON</a>
+</dialog>
+<dialog id="history-dialog" aria-labelledby="history-title">
+  <div class="dialog-top"><h2 id="history-title">History on this device</h2><button id="close-history" class="icon-button" aria-label="Close history">&times;</button></div>
+
+    <p class="settings-note">Learns from MyTube searches, saved and hidden videos. Cached videos expire after 30 days. No browser or YouTube history is read.</p>
+    <div id="home-interests"></div>
+    <button id="refresh-home" class="outline-button">Refresh suggestions</button><button id="clear-home" class="text-button">Clear interests & cache</button>
+    <p id="home-status" class="settings-note" role="status"></p>
+  <div class="query-actions"><button id="done-history" class="primary-button">Done</button></div>
+</dialog>
+<dialog id="query-dialog" aria-labelledby="query-title">
+  <div class="dialog-top"><h2 id="query-title">New search</h2><button id="close-query" class="icon-button" aria-label="Close search">×</button></div>
+  <form id="query-form">
+    <label for="query-input">What would you like to watch?</label>
+    <textarea id="query-input" rows="6" maxlength="6000" required placeholder="Describe what you are in the mood for, what interests you, and what you would rather avoid…" aria-describedby="query-help query-error"></textarea>
+    <p class="search-disclosure">ChatGPT interprets your request and asks a question only when needed. MyTube then searches YouTube with your local key, or finds videos on the web.</p>
+    <p id="query-help" hidden></p>
+    <p id="query-error" role="alert"></p>
+    <p id="interpretation-status" role="status" hidden></p>
+    <section id="query-clarification" hidden aria-labelledby="clarification-question">
+      <h3 id="clarification-question"></h3>
+      <div id="clarification-options" class="query-actions"></div>
+      <label for="clarification-answer">Your answer</label>
+      <textarea id="clarification-answer" rows="2" maxlength="1000" placeholder="Choose an option or explain in your own words"></textarea>
+    </section>
+    <div class="query-actions"><button id="cancel-query" type="button" class="outline-button">Cancel</button><button id="submit-query" type="submit" class="primary-button">Find videos</button></div>
+  </form>
+</dialog>
+<dialog id="about-dialog" aria-labelledby="about-title">
+  <div class="dialog-top"><h2 id="about-title">About MyTube</h2><button id="close-about" class="icon-button" aria-label="Close dialog">&times;</button></div>
+  <p>Your description goes to OpenAI using your granted ChatGPT access and can use your plan allowance. ChatGPT searches the web for YouTube videos; MyTube checks sourced links and public titles with YouTube. No Google sign-in is needed for this search.</p>
+  <p>Matching cached videos appear first. New results follow the web search. An unusable response is retried once automatically; Your request shows the retry. Durations are added when existing YouTube authorization allows a metadata lookup, without asking you to sign in to Google. Upload date, views and spoken language are not verified through web search.</p>
+  <p>MyTube keeps interests, preferences, saved/hidden choices and public video metadata on this device. Video metadata expires after 30 days. Search requests remain until you clear them. Clear or disable it in Settings. Original search requests are saved locally when history is enabled. ChatGPT tokens are not saved in browser storage. This version does not refresh the home automatically.</p>
+  <p>Subscriptions are read only when you connect YouTube in the Subscriptions view. MyTube does not read viewing history, playback progress or browser cookies. Thumbnails load from YouTube; video links open YouTube normally. Existing Google access from earlier versions can be managed below.</p>
+  <p>Live results exclude explicit AI or synthetic-production disclosures detected in titles and descriptions. This limited English/French text heuristic does not inspect audio or video, authenticate channels, or detect undisclosed AI generation. Low view counts and AI-related topics alone are not exclusion criteria.</p>
+  <p>The initial NASA collection is a saved experiment, separate from new ChatGPT searches. Cached metadata expires after 30 days. This development preview has not had an independent security audit and is not approved for public distribution.</p>
+  <p><a href="https://myaccount.google.com/connections" target="_blank" rel="noopener noreferrer">Manage Google app access</a></p>
+  <p class="policy-links"><a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener noreferrer">YouTube Terms</a><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy</a><a href="https://openai.com/policies/privacy-policy/" target="_blank" rel="noopener noreferrer">OpenAI Privacy</a></p>
+</dialog>
+<noscript><p class="noscript">Enable JavaScript to explore the saved collection. No connection or sign-in is needed.</p></noscript>
+<!--APP-->
+</body>
+</html>

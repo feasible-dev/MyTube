@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "query_origin": "Fixed manually by the coding agent before collection; no runtime LLM call.",
+  "relevance_language": "en",
+  "results_per_query": 25,
+  "intents": [
+    {
+      "id": "aviation",
+      "description": "Serious technical investigations of aviation accidents, 20-90 minutes, without sensationalism or Shorts.",
+      "min_minutes": 20,
+      "max_minutes": 90,
+      "queries": ["aviation accident investigation technical analysis", "aircraft accident investigation final report explained", "air crash investigation pilot analysis", "aviation safety accident reconstruction"],
+      "terms": ["aviation", "aircraft", "accident", "investigation", "analysis", "report", "safety", "pilot", "reconstruction"]
+    },
+    {
+      "id": "mathematics",
+      "description": "Advanced mathematics or elegant proofs, 15-60 minutes, rigorous and understandable.",
+      "min_minutes": 15,
+      "max_minutes": 60,
+      "queries": ["advanced mathematics elegant proof", "mathematics theorem rigorous proof lecture", "real analysis proof explained", "abstract algebra beautiful proof"],
+      "terms": ["mathematics", "math", "proof", "theorem", "analysis", "algebra", "rigorous", "lecture", "explained"]
+    },
+    {
+      "id": "history",
+      "description": "In-depth historical documentaries, 30-120 minutes, without clickbait.",
+      "min_minutes": 30,
+      "max_minutes": 120,
+      "queries": ["history documentary primary sources", "historical documentary archival research", "ancient history documentary archaeology", "modern history documentary historian"],
+      "terms": ["history", "historical", "documentary", "archive", "archival", "sources", "historian", "archaeology", "research"]
+    }
+  ]
+}

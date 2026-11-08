@@ -1,0 +1,48 @@
+# Local credentials, account metadata, and private evidence
+.private/
+.secrets
+.secrets.*
+**/.secrets
+**/.secrets.*
+.env
+.env.*
+!.env.example
+**/credentials*.json
+**/tokens*.json
+*.pem
+*.key
+*.log
+
+# Tool caches and dependencies
+node_modules/
+.mytube-clean-build-*/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# Local public-video datasets; review retention and publication separately
+results/b1/
+results/b11/
+
+# Generated local previews include cached public metadata and saved AI output.
+poc/index.html
+poc/thumbnails/
+dist/
+
+# Private installation configuration and generated reports
+extension/google-client.json
+results/
+test-*.txt
+ui-output.txt
+.publish-*/
+*.dpapi
+.npmrc
+
+# Local experiment narratives; product documentation lives in README/CHANGELOG.
+GO_NO_GO.md
+tech_update.md
+connector/HISTORY.md
+extension/CHANGELOG.md
+spikes/*/*.md

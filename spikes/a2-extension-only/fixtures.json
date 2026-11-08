@@ -1,0 +1,22 @@
+{
+  "data_kind": "SYNTHETIC_ONLY_NOT_YOUTUBE_VIDEOS",
+  "intents": [
+    {"id": "aviation", "min_minutes": 20, "max_minutes": 90, "terms": ["aviation", "accident", "investigation", "technical"], "expected_ids": ["aviation-a", "aviation-b"]},
+    {"id": "mathematics", "min_minutes": 15, "max_minutes": 60, "terms": ["mathematics", "proof", "rigorous", "theorem"], "expected_ids": ["math-a", "math-b"]},
+    {"id": "history", "min_minutes": 30, "max_minutes": 120, "terms": ["history", "documentary", "archive", "historical"], "expected_ids": ["history-a", "history-b"]}
+  ],
+  "candidates": [
+    {"fixture_id": "aviation-a", "title": "Technical aviation accident investigation", "description": "A synthetic metadata example.", "duration_minutes": 45, "is_short": false},
+    {"fixture_id": "aviation-b", "title": "Aviation systems", "description": "Technical explanation.", "duration_minutes": 25, "is_short": false},
+    {"fixture_id": "aviation-short", "title": "Technical aviation accident investigation", "description": "Excluded synthetic Short.", "duration_minutes": 1, "is_short": true},
+    {"fixture_id": "aviation-long", "title": "Technical aviation accident investigation", "description": "Excluded by duration.", "duration_minutes": 150, "is_short": false},
+    {"fixture_id": "math-a", "title": "Rigorous mathematics theorem proof", "description": "A synthetic metadata example.", "duration_minutes": 35, "is_short": false},
+    {"fixture_id": "math-b", "title": "Mathematics discussion", "description": "A proof explained.", "duration_minutes": 20, "is_short": false},
+    {"fixture_id": "math-long", "title": "Rigorous mathematics theorem proof", "description": "Excluded by duration.", "duration_minutes": 90, "is_short": false},
+    {"fixture_id": "history-a", "title": "History documentary", "description": "Historical archive analysis.", "duration_minutes": 75, "is_short": false},
+    {"fixture_id": "history-b", "title": "History documentary", "description": "A synthetic metadata example.", "duration_minutes": 40, "is_short": false},
+    {"fixture_id": "history-short-duration", "title": "History documentary", "description": "Historical archive analysis.", "duration_minutes": 10, "is_short": false},
+    {"fixture_id": "unknown-duration", "title": "History mathematics aviation", "description": "Missing duration must be excluded.", "duration_minutes": null, "is_short": false},
+    {"fixture_id": "unrelated", "title": "Cooking tutorial", "description": "No selected topic terms.", "duration_minutes": 40, "is_short": false}
+  ]
+}

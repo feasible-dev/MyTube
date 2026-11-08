@@ -1,0 +1,48 @@
+{
+  "name": "mytube",
+  "version": "0.8.41",
+  "private": true,
+  "type": "module",
+  "description": "Personal video discovery with a browser extension and a local connector.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node scripts/check.mjs product",
+    "release:check": "node scripts/release-check.mjs",
+    "test:a1": "node --test spikes/a1-openai-login/a1.test.mjs",
+    "poc:build": "node poc/build.mjs",
+    "extension:build": "node extension/build.mjs",
+    "check:extension": "node scripts/check.mjs extension",
+    "a1": "node --test spikes/a1-openai-login/a1.test.mjs && node spikes/a1-openai-login/login.mjs",
+    "test:b1": "node --test spikes/b1-youtube-candidates/b1.test.mjs spikes/b1-youtube-candidates/assessment.test.mjs",
+    "check:b1": "npm run test:b1 && node spikes/b1-youtube-candidates/technical-checks.mjs",
+    "b1": "node --test spikes/b1-youtube-candidates/b1.test.mjs && node spikes/b1-youtube-candidates/collect.mjs",
+    "test:b2": "node --test spikes/b2-quota-auth/b2.test.mjs",
+    "check:b2": "npm run test:b2 && node spikes/b2-quota-auth/check.mjs",
+    "b2:feeds": "npm run test:b2 && node spikes/b2-quota-auth/sample.mjs",
+    "test:b11": "node --test spikes/b1-youtube-candidates/b1.test.mjs spikes/b1-controlled-discovery/discovery.test.mjs",
+    "check:b11": "npm run test:b11 && node spikes/b1-controlled-discovery/run.mjs --cached",
+    "b11:plan": "node spikes/b1-controlled-discovery/run.mjs --plan",
+    "b11:collect": "npm run test:b11 && node spikes/b1-controlled-discovery/run.mjs --live",
+    "test:a3": "node --test spikes/a3-query-generation/query.test.mjs",
+    "check:a3": "npm run test:a3 && node spikes/a3-query-generation/run.mjs --check",
+    "a3:plan": "node spikes/a3-query-generation/run.mjs --plan",
+    "a3": "npm run test:a3 && node spikes/a3-query-generation/run.mjs --live",
+    "test:a3:chatgpt": "node --test spikes/a1-openai-login/a1.test.mjs spikes/a3-query-generation/query.test.mjs spikes/a3-query-generation/chatgpt.test.mjs",
+    "a3:chatgpt": "npm run test:a3:chatgpt && node spikes/a3-query-generation/chatgpt.mjs",
+    "connector": "node connector/server.mjs",
+    "key:setup": "node connector/windows-key.mjs",
+    "secrets:setup": "node scripts/setup-secrets.mjs",
+    "secrets:edit": "node scripts/setup-secrets.mjs --edit",
+    "test:connector": "node --test connector/connector.test.mjs connector/chatgpt-session.test.mjs extension/discovery.test.mjs extension/auth-window.test.mjs",
+    "test:all": "node scripts/check.mjs all"
+  },
+  "dependencies": {
+    "jose": "6.2.12"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "linkedom": "0.18.15"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "experiment": "B1.1",
+  "query_origin": "Prepared reference queries, not runtime AI or inferred user preferences.",
+  "relevance_language": "en",
+  "results_per_query": 25,
+  "intention": "Long, serious NASA and Challenger investigations; engineering failures, human error and institutional decisions.",
+  "intents": [
+    {
+      "id": "direct",
+      "description": "DIRECT: NASA and spaceflight engineering investigations.",
+      "min_minutes": 20,
+      "max_minutes": 120,
+      "queries": ["Challenger disaster engineering investigation documentary", "NASA Columbia accident investigation technical lecture", "Apollo 1 fire engineering investigation documentary", "space shuttle failure institutional decision making lecture"],
+      "terms": ["nasa", "challenger", "columbia", "apollo", "shuttle", "spaceflight"],
+      "bridge_terms": ["failure", "failures", "investigation", "investigations", "engineering", "safety", "decisions", "accident"],
+      "exploration_terms": ["lecture", "archive", "archival", "oral", "history"]
+    },
+    {
+      "id": "adjacent",
+      "description": "ADJACENT: failure analysis and institutional decisions in other engineering domains.",
+      "min_minutes": 20,
+      "max_minutes": 120,
+      "queries": ["maritime disaster engineering investigation human factors documentary", "nuclear accident safety culture institutional decisions lecture", "aviation accident organizational failure technical investigation", "deep sea engineering failure investigation documentary"],
+      "terms": ["maritime", "ship", "nuclear", "reactor", "aviation", "aircraft", "submarine", "ocean"],
+      "bridge_terms": ["failure", "failures", "investigation", "investigations", "engineering", "safety", "decisions", "accident"],
+      "exploration_terms": ["lecture", "archive", "archival", "oral", "history"]
+    },
+    {
+      "id": "wildcard",
+      "description": "WILDCARD: connected technical archives, lectures and experimental technology histories.",
+      "min_minutes": 20,
+      "max_minutes": 120,
+      "queries": ["retired engineer oral history experimental aircraft failures", "Soviet submarine engineering safety archive lecture", "university lecture bridge collapse engineering failure history", "experimental reactor project failure historical technical documentary"],
+      "terms": ["submarine", "reactor", "bridge", "aircraft", "experimental", "engineer", "technology"],
+      "bridge_terms": ["failure", "failures", "investigation", "investigations", "engineering", "safety", "decisions", "accident"],
+      "exploration_terms": ["lecture", "archive", "archival", "oral", "history", "university", "experimental"]
+    }
+  ]
+}
