@@ -1,6 +1,6 @@
 {
   "name": "mytube",
-  "version": "0.8.42",
+  "version": "0.8.43",
   "private": true,
   "type": "module",
   "description": "Personal video discovery with a browser extension and a local connector.",

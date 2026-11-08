@@ -23,6 +23,23 @@ Provider references: [YouTube authentication](https://developers.google.com/yout
 and [API key management](https://docs.cloud.google.com/docs/authentication/api-keys).
 Google Cloud menu wording can vary.
 
+## Recommended launcher
+
+After installing Node.js 22+, double-click MyTube.cmd in the extracted repository.
+The launcher checks installed dependencies and built assets. On first use it runs
+setup (dependency installation, build and guided native key window), then starts
+the connector setup. The user still loads dist/brave in Chrome manually and pastes
+the public extension ID once. Leave the launcher console open while using MyTube.
+
+Later launches reuse installed dependencies, assets and the saved ID. After an
+update, missing/mismatched dependencies or assets trigger installation and rebuild
+without reopening key entry when a local extension ID is already saved. Reload
+the extension after rebuilding. A second concurrent connector still reports a port
+conflict; close the previous launcher before starting another. The launcher does
+not change the trusted-origin policy or register a background Windows service.
+
+The commands below remain available for developers and troubleshooting.
+
 ## Fresh installation
 
 The supported development path is Windows with Chrome. Brave compatibility is not

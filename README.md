@@ -1,30 +1,15 @@
 # MyTube
 
-Describe what you want to watch. Get videos on your topic, related subjects, and unexpected discoveries.
+Find videos on your topic, related subjects, and unexpected discoveries.
 
-**Requires:** Windows, Chrome, [Node.js 22+](https://nodejs.org/), and ChatGPT sign-in.
+## Install (Windows + Chrome)
 
-MyTube has two parts: a Chrome extension and a local helper running on your PC.
+1. Install [Node.js 22+](https://nodejs.org/). Download this repository and extract it into a permanent folder.
+2. Double-click **MyTube.cmd**. It installs what is needed and opens **Connect YouTube**.
+3. Get your key in [Google Cloud](https://console.cloud.google.com/apis/credentials): create a project, enable **YouTube Data API v3** in **Library**, then **Credentials > Create credentials > API key**. Restrict the key to **YouTube Data API v3**. Paste it into the **Connect YouTube** window and click **Save key**.
+4. Open `chrome://extensions`, enable **Developer mode**, click **Load unpacked**, and select this project's `dist/brave` folder. Paste the extension's ID into the launcher's prompt (once only).
+5. Leave the launcher running. Open MyTube from Chrome, click **New search**, and sign in to ChatGPT.
 
-1. Download or clone this repository. Open PowerShell in its folder:
+**Next time:** double-click **MyTube.cmd**. Your key and extension ID are remembered.
 
-   ```powershell
-   npm.cmd run setup
-   ```
-
-2. Setup opens a separate Windows window titled **MyTube - Connect YouTube**. Leave it open while you get your key:
-   - Open [Google Cloud](https://console.cloud.google.com/apis/credentials) and create a project.
-   - **APIs & Services > Library:** enable **YouTube Data API v3**.
-   - **Credentials > Create credentials > API key**. Restrict it to **YouTube Data API v3**.
-   - Return to that Windows window, paste the key into its masked text field, and click **Save key**. Close the window after **Key saved** appears. This happens before installing the Chrome extension.
-3. In `chrome://extensions`, enable **Developer mode**, then **Load unpacked** and select `dist/brave`.
-4. Start the local helper:
-
-   ```powershell
-   npm.cmd start
-   ```
-
-   Copy MyTube's ID from `chrome://extensions` and paste it into the terminal when asked (once only). This is the extension ID, not your YouTube key. Keep this terminal open.
-5. Open MyTube, click **New search**, and sign in to ChatGPT. Next time, just run `npm start`.
-
-Development preview. [Detailed instructions](agents.markdown).
+Development preview: Chrome extension + local helper. [Details and troubleshooting](agents.markdown).

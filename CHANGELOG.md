@@ -1,5 +1,12 @@
 # MyTube release notes
 
+## One launcher: 0.8.43
+
+Double-click MyTube.cmd to install on first use and start on later visits. Missing
+or outdated dependencies/assets trigger setup or an update build; configured
+installations skip key entry during updates. Chrome extension loading and the
+one-time extension ID prompt remain explicit. The README now follows this flow.
+
 ## Guided setup: 0.8.42
 
 `npm run setup` installs dependencies, builds the extension and opens a guided

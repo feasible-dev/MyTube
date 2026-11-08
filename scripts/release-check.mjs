@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 // Publication is opt-in: never inspect private files or depend on gitignore
 // alone to decide what can leave the workstation.
 export async function releaseFiles(root = new URL('../', import.meta.url)) {
-  const files = ['.gitignore', '.npmignore', 'package.json', 'package-lock.json',
+  const files = ['.gitignore', '.npmignore', 'MyTube.cmd', 'package.json', 'package-lock.json',
     'README.md', 'AGENTS.md', 'agents.markdown', 'SECURITY.md', 'CHANGELOG.md', 'LOCAL-SETUP.md', 'WINDOWS-KEY-STORAGE.md'];
   const historicalDocs = new Set(['connector/HISTORY.md', 'extension/CHANGELOG.md']);
   async function walk(folder) {
