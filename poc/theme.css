@@ -1,0 +1,12 @@
+/* Shared, keyboard-operable sun/moon switch. The disc marks the active theme. */
+.theme-toggle{position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:space-between;align-self:center;flex:0 0 66px;width:66px;height:36px;min-height:36px;padding:0 8px;border:1px solid #afbdcc;border-radius:999px;background:#e1e7ef;color:#536477;cursor:pointer;box-shadow:inset 0 1px 2px #20334c0d}
+.theme-toggle::before{content:"";position:absolute;z-index:-1;left:3px;top:3px;width:28px;height:28px;border-radius:50%;background:#fff;box-shadow:0 1px 4px #20334c30;transition:transform .18s ease}
+.theme-toggle svg{width:18px;height:18px;flex-shrink:0;pointer-events:none}
+.theme-toggle .theme-sun{color:#8a5b13}
+.theme-toggle[aria-checked="true"]{background:#253449;border-color:#60718a;color:#9aaabd}
+.theme-toggle[aria-checked="true"]::before{transform:translateX(30px);background:#e2eafa}
+.theme-toggle[aria-checked="true"] .theme-sun{color:#9aaabd}
+.theme-toggle[aria-checked="true"] .theme-moon{color:#304c75}
+.theme-toggle:hover{border-color:#6081a8}
+.theme-toggle:focus-visible{outline:2px solid #4479ba;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.theme-toggle::before{transition:none}}

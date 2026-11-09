@@ -18,6 +18,11 @@ import { createQueryDialog } from './query-dialog.mjs';
 import { renderSearchDetails } from './search-details.mjs';
 import { bindHistoryControls } from './history-controls.mjs';
 import { renderBlockedChannels } from './channel-controls.mjs';
+import { bindTheme } from './theme.mjs';
+
+bindTheme();
+const setupAccessLink = document.getElementById('setup-access-link');
+if (setupAccessLink) setupAccessLink.hidden = !['chrome-extension:', 'moz-extension:'].includes(globalThis.location?.protocol);
 
 let viewingPreferences = defaultPreferences();
 const $ = id => document.getElementById(id);
@@ -38,7 +43,7 @@ function rowsByColumn(videos) {
   return rows;
 }
 let homeStorage;
-try { if (globalThis.location?.protocol === 'chrome-extension:') homeStorage = globalThis.localStorage; } catch { /* Unavailable storage: session-only. */ }
+try { if (['chrome-extension:', 'moz-extension:'].includes(globalThis.location?.protocol)) homeStorage = globalThis.localStorage; } catch { /* Unavailable storage: session-only. */ }
 let home = loadHome(homeStorage), homeMode = Boolean(homeStorage) || globalThis.MyTubeLive?.status?.().provider === 'chatgpt_web', homeEpoch = 0;
 const homeRefresh = createRequestOwner();
 viewingPreferences = loadViewingPreferences(homeStorage, [...home.topics].sort((a, b) => b.updatedAt - a.updatedAt)[0]?.preferences);
@@ -281,7 +286,7 @@ function updateLoadingTime() {
   timer.textContent = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')} elapsed`;
 }
 let intentionDraft = '';
-let liveStatus = detectLiveStatus(globalThis.MyTubeLive, globalThis.chrome, globalThis.location?.protocol);
+let liveStatus = detectLiveStatus(globalThis.MyTubeLive, globalThis.browser ?? globalThis.chrome, globalThis.location?.protocol);
 const liveMessages = {
   YOUTUBE_KEY_MISSING: 'Add your YouTube key to the local .secrets file, then start a new search.',
   YOUTUBE_KEY_INVALID: 'The local YouTube key configuration is invalid. Check .secrets in your own editor; do not paste the key into chat.',
@@ -308,11 +313,11 @@ const liveMessages = {
   CHATGPT_REFUSED: 'ChatGPT declined this request. You can edit your request and try again.',
   CHATGPT_TIMEOUT: 'The ChatGPT request timed out.',
   CLEANUP_REQUIRED: 'OpenAI session cleanup was not confirmed. Disconnect MyTube in your ChatGPT account before trying again.',
-  EXTENSION_REQUIRED: 'This is the file preview. Open MyTube using its toolbar icon in Google Chrome to use Google sign-in.',
+  EXTENSION_REQUIRED: 'This is the file preview. Open the installed MyTube extension from your browser’s Extensions menu to connect.',
   LIVE_MODULE_UNAVAILABLE: 'The live-search module did not load. Reload MyTube on the browser extensions page, close this tab, then reopen MyTube from its toolbar icon.',
   RELOAD_REQUIRED: 'This tab belongs to an older extension session. Close it and reopen MyTube from its toolbar icon.',
   GOOGLE_SETUP_REQUIRED: 'Live search needs the developer Google registration before it can connect.',
-  BROWSER_AUTH_UNSUPPORTED: 'Google sign-in is unavailable in this browser session. The Firefox build is local-only; in Brave, the native identity API needs diagnosis.',
+  BROWSER_AUTH_UNSUPPORTED: 'Optional Google subscriptions are unavailable in this browser. Normal discovery uses the local companion and ChatGPT sign-in.',
   GOOGLE_SIGN_IN_FAILED: 'Google sign-in was cancelled or could not complete. Brave may reject this authentication flow. No search results were retrieved.',
   REQUIRED_SCOPE_MISSING: 'The required YouTube read-only permission was not confirmed. No search was sent.',
   SIGN_IN_REQUIRED: 'Google authorization expired or was rejected. Start a new search to sign in again.',
@@ -826,7 +831,7 @@ $('query-form').addEventListener('submit', async event => {
   });
 });
 function updateQueryHelp() {
-  liveStatus = detectLiveStatus(globalThis.MyTubeLive, globalThis.chrome, globalThis.location?.protocol);
+  liveStatus = detectLiveStatus(globalThis.MyTubeLive, globalThis.browser ?? globalThis.chrome, globalThis.location?.protocol);
   $('submit-query').disabled = !liveStatus.ready;
   $('query-help').hidden = liveStatus.ready;
   $('query-help').textContent = liveStatus.ready ? '' : liveMessages[liveStatus.reason] ?? 'Live search is unavailable.';

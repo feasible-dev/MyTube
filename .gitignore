@@ -16,6 +16,7 @@
 # Tool caches and dependencies
 node_modules/
 .mytube-clean-build-*/
+.mytube-firefox-smoke-*/
 .venv/
 __pycache__/
 *.pyc

@@ -7,7 +7,7 @@ import { extensionIdForStart } from './start.mjs';
 
 test('first startup remembers only a validated extension ID; subsequent startup needs no prompt', async () => {
   const dir = await mkdtemp(join(tmpdir(), 'mytube-start-')), path = join(dir, 'setup.json');
-  const first = 'a'.repeat(32), second = 'b'.repeat(32);
+  const first = 'a'.repeat(32), second = 'moz-extension://12345678-1234-4123-8123-123456789abc';
   try {
     assert.equal(await extensionIdForStart({ env: {}, path, ask: async () => first }), first);
     assert.deepEqual(JSON.parse(await readFile(path, 'utf8')), { extensionId: first });

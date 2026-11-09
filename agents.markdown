@@ -25,6 +25,33 @@ Google Cloud menu wording can vary.
 
 ## Recommended launcher
 
+`Install MyTube.html` is a standalone, script-free visual installation guide for
+Chrome, Edge, Brave and Firefox. The welcome page detects the browser, offers a
+manual selector, gives pinning and installation instructions, and exposes an
+immediate Open MyTube link plus a selectable same-profile address. The manifest
+suggests Alt+Shift+M for the extension action; conflicts may require reassignment
+in browser settings. No toolbar pinning is performed automatically. The app's
+Settings > Setup & browser access returns to the guide. Copy connection ID uses
+the clipboard only on a click, with a manual-copy fallback; no permission added.
+
+The extension opens `welcome.html` on a new installation, and exposes the guide
+through Extension options. It checks the companion, opens the native YouTube key
+window on request, and starts cancellable ChatGPT sign-in on request. Checking
+status does not validate the key with Google or initiate ChatGPT login. Updates
+do not open a new guide tab or change saved browser data.
+
+`npm.cmd run extension:package` builds separate clean candidates under
+`dist/distribution` and creates versioned Chrome and Firefox ZIPs from an exact generated
+file allowlist. This build never reads `extension/google-client.json`; personal
+Google registration is excluded and optional subscriptions are unavailable in
+that candidate. Local development packages in `dist/brave` remain independent.
+`results/distribution-package.json` records the archive hash and pending live
+verification. This is not store publication or a companion installer: Node.js,
+the launcher, exact extension ID configuration and manual extension loading are
+still required. A public release still needs a companion installation solution,
+store identity configuration, listing/privacy disclosures, screenshots, provider
+access verification on a fresh account, and review by the target store.
+
 After installing Node.js 22+, double-click MyTube.cmd in the extracted repository.
 The launcher checks installed dependencies and built assets. On first use it runs
 setup (dependency installation, build and guided native key window), then starts
@@ -42,8 +69,10 @@ The commands below remain available for developers and troubleshooting.
 
 ## Fresh installation
 
-The supported development path is Windows with Chrome. Brave compatibility is not
-fully verified; Firefox is an experimental package without live authentication.
+The development path is Windows with a Chromium or Firefox extension. Firefox now
+uses the companion for ChatGPT sign-in and discovery. Its isolated browser smoke
+test uses synthetic providers; real account login and provider searches still need
+live verification. Brave and Edge compatibility is not fully verified.
 Install Node.js 22 or newer, clone/download the repository into a stable private
 folder, and open PowerShell there:
 
@@ -84,7 +113,23 @@ Keep this terminal open. The first start asks for the extension ID and stores on
 that public ID in ignored .mytube-local.json. Later starts reuse it. Use
 npm start -- --configure to change it after moving/reinstalling the extension.
 An explicit MYTUBE_EXTENSION_ID environment variable overrides the saved value.
-The connector still accepts exactly one extension ID, never arbitrary origins.
+The connector still accepts exactly one browser installation, never arbitrary origins.
+For Firefox, temporarily load `dist/firefox/manifest.json` from
+`about:debugging#/runtime/this-firefox`. Paste the exact `moz-extension://...`
+connection address displayed in the welcome guide into the launcher prompt.
+This is Firefox's internal profile UUID, not the manifest's public add-on ID.
+Switching browsers requires closing the old connector and running
+`npm start -- --configure`. Firefox site permissions must be allowed. Reinstalling
+or changing profiles may change the UUID. Temporary installation ends when Firefox
+closes; durable distribution requires Mozilla signing. Google subscriptions remain
+Chromium-only. Firefox declares search terms and authentication information in its
+data-transmission permissions rather than claiming no data transmission.
+
+`node scripts/firefox-smoke.mjs` uses installed Windows Firefox in an isolated,
+headless profile with a synthetic connector on a separate port. It verifies actual
+extension requests, discovery plumbing and shared theme persistence. It never uses
+real account credentials; output is in ignored `results/`, profiles in ignored
+`.mytube-firefox-smoke-*`. It does not establish real-provider success.
 
 Setup installs dependencies, builds the extension, and opens the native key window.
 Saving automatically applies Windows protection; there is no encryption decision.
@@ -265,7 +310,8 @@ Documentation-only changes need no version bump or connector restart.
    Do not fabricate a client ID or ship the owner's local Google configuration.
 3. The unpacked extension ID may differ by computer/path. The connector's default
    trusted ID is for the development installation. Set nonsecret
-   MYTUBE_EXTENSION_ID to the actual installed 32-letter ID for each launch.
+   MYTUBE_EXTENSION_ID to the actual installed 32-letter Chromium ID or exact
+   Firefox `moz-extension://UUID` connection address for each launch.
    Never relax the exact Origin/Host checks or allow wildcard origins as a shortcut.
 4. Runtime ChatGPT registration is handled by connector/session.mjs; never ship
    .private registration data from another user. Do not assume successful offline

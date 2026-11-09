@@ -9,14 +9,14 @@ import { publicVideoMetadata } from './public-videos.mjs';
 import { createWebProgress } from './web-progress.mjs';
 import { createWildcardProgress } from './wildcard-progress.mjs';
 import { createKeyYouTube, YOUTUBE_PUBLIC_ERRORS } from './youtube-key.mjs';
+import { connectorOrigin } from '../extension/connector-origin.mjs';
 
 export const PORT = 43817;
 export const EXTENSION_ID = 'fagpjbnjdebnnhdgbkooeclhcbfjjakl';
 const safeErrors = new Set(PLAN_ERROR_CODES);
 
 export async function startConnector({ port = PORT, planner = planWithChatGPT, signOut = signOutChatGPT, connect = connectChatGPT, metadata = publicVideoMetadata, preview, youtube = createKeyYouTube(), extensionId = EXTENSION_ID } = {}) {
-  if (!/^[a-p]{32}$/.test(extensionId)) throw new Error('INVALID_EXTENSION_ID');
-  const ORIGIN = `chrome-extension://${extensionId}`;
+  const ORIGIN = connectorOrigin(extensionId);
   let active = null, authorization = null, requestId = null, idle = Promise.resolve(), closing = false;
   const youtubeJobs = new Set();
   const server = createServer({ maxHeaderSize: 8192 }, async (req, res) => {

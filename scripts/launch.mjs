@@ -37,7 +37,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     if (process.platform !== 'win32' || Number(process.versions.node.split('.')[0]) < 22) throw new Error('Use Windows with Node.js 22 or newer: https://nodejs.org/');
     const mode = await launchMode();
     if (mode !== 'start') await run('scripts/setup.mjs', mode === 'update' ? ['--skip-key'] : []);
-    if (mode === 'update') console.log('Updated. Reload MyTube in chrome://extensions before searching.');
+    if (mode === 'update') console.log('Updated. Reload MyTube in your browser extensions page (Chrome / Edge / Brave), or about:debugging (Firefox), then reopen MyTube.');
     await run('scripts/start.mjs');
   } catch (error) { console.error(error.message); process.exitCode = 1; }
 }

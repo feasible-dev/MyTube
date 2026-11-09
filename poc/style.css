@@ -1,5 +1,6 @@
 ﻿:root{color-scheme:dark;--bg:#101214;--panel:#191c20;--line:#30353a;--ink:#edf1f7;--muted:#aab2ba;--primary:#28558e;--focus:#91b9ed;--blue:#89a7cf;--purple:#718bb5;font-family:Bahnschrift,"Aptos","Segoe UI",sans-serif;font-size:18px;font-synthesis:none}
 
+:root:not([data-theme="dark"]){color-scheme:light;--bg:#f6f7f9;--panel:#fff;--line:#ccd4de;--ink:#202c3b;--muted:#556477;--primary:#28558e;--focus:#245fa8;--blue:#336292;--purple:#85516f}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink)}
 button,input,select,textarea{font:inherit;color:inherit}
@@ -342,10 +343,11 @@ main.search-layout::before{display:none}
 .card-details{align-items:center;flex-wrap:wrap}
 .card-details .ban-channel{font-size:13px;font-weight:600;margin-left:0;padding:5px 8px}
 .card-details .save-video{margin-top:0;font-size:12px;padding:4px 5px}
-.video-card>.card-details{grid-column:1/-1;min-height:30px;margin-top:8px}
-.video-card.is-wildcard .video-title{height:2.8em}
-.video-card.is-wildcard .card-meta{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.video-card.is-wildcard>.card-details{height:32px;flex-wrap:nowrap}
+.video-card>.card-details{grid-column:1/-1;height:32px;min-height:32px;margin-top:8px;flex-wrap:nowrap}
+/* Reserve identical title, metadata and action space in every discovery column. */
+.video-card .card-body{height:108px;min-height:108px}
+.video-card .video-title{height:2.8em}
+.video-card .card-meta{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .more-results{grid-column:1/-1;justify-self:center;margin:10px 0 24px}
 
 .feed-tabs, .feed-controls { display: flex; flex-wrap: wrap; gap: .6rem; margin: 0 0 1rem; }
@@ -379,3 +381,50 @@ main.search-layout::before{display:none}
 @media(prefers-reduced-motion:reduce) {
   .analysis-active::before { animation: none; transform: none; opacity: .35; }
 }
+
+/* Light surfaces retain the blue discovery and plum wildcard identities. */
+:root:not([data-theme="dark"]) .nav-button span,
+:root:not([data-theme="dark"]) .total-count{background:#e6ebf1;color:#42536a}
+:root:not([data-theme="dark"]) .outline-button{border-color:#afbecf;color:#294a70}
+:root:not([data-theme="dark"]) :is(.search-box,.select-wrap select,.method-switch,.stream-letter,.video-card,.empty){border-color:#bcc8d5}
+:root:not([data-theme="dark"]) .video-card:hover{border-color:#668bb3}
+:root:not([data-theme="dark"]) .method-switch button.selected{background:#deebfa;color:#204b7b}
+:root:not([data-theme="dark"]) .cover{background:#e5ebf2}
+:root:not([data-theme="dark"]) .cover.is-loading{background:#e2e7ed}
+:root:not([data-theme="dark"]) .cover-placeholder{color:#52657c}
+.duration-badge{color:#fff}
+:root:not([data-theme="dark"]) :is(.channel-line,.card-meta,.ai-status){color:#526174}
+:root:not([data-theme="dark"]) .channel-avatar{background:#dfeafa;color:#315f94}
+:root:not([data-theme="dark"]) .ai-status{border-color:#a6b4c5}
+:root:not([data-theme="dark"]) .ai-status.ai-claimed{color:#28558e;border-color:#849fbe}
+:root:not([data-theme="dark"]) .ai-status.ai-disclosed{color:#7b5519;border-color:#b79a6b}
+:root:not([data-theme="dark"]) .icon-button{background:#edf1f6;border-color:#b4c0ce;color:#3b526c}
+:root:not([data-theme="dark"]) .icon-button.saved{background:#dceafa;border-color:#7699bf;color:#28558e}
+:root:not([data-theme="dark"]) .ai-panel{background:#f4f0f7;border-color:#cec0d8}
+:root:not([data-theme="dark"]) :is(.ai-panel>p,.interest-list,.ai-query small){color:#62536f}
+:root:not([data-theme="dark"]) .ai-query{border-color:#d5cadd}
+:root:not([data-theme="dark"]) .review-flag{color:#855711!important}
+:root:not([data-theme="dark"]) dialog{background:#fff;border-color:#a4b6cc;box-shadow:0 18px 70px #23364c26}
+:root:not([data-theme="dark"]) dialog::backdrop{background:#25344966}
+:root:not([data-theme="dark"]) dialog p{color:#556477}
+:root:not([data-theme="dark"]) :is(.noscript,.expired){background:#fff5df;border-color:#c6a469;color:#77551c}
+:root:not([data-theme="dark"]) :is(#query-input,#clarification-answer){border-color:#93a9c3}
+:root:not([data-theme="dark"]) #query-error{color:#a13036}
+:root:not([data-theme="dark"]) .settings-actions{background:#fff}
+:root:not([data-theme="dark"]) .previous-result{background:#edf2f6;border-color:#bdccd9}
+:root:not([data-theme="dark"]) .search-layout #current-topic{background:#e8f0fb;border-color:#aec5e0;color:#234e7b}
+:root:not([data-theme="dark"]) .two-column-search .stream-heading h3{color:#2c598a}
+:root:not([data-theme="dark"]) :is(.two-column-search .direct .video-card,.two-column-search .related .video-card){background:#f5f9ff;border-color:#bbcee4}
+:root:not([data-theme="dark"]) :is(.two-column-search .recent .video-card,.two-column-search .recent .empty,.past-searches-grid .video-card){background:#f1f3f6;border-color:#c6cdd6}
+:root:not([data-theme="dark"]) :is(.two-column-search .recent .stream-heading h3,.two-column-search .recent .video-title){color:#526174}
+:root:not([data-theme="dark"]) .two-column-search .empty{background:#f0f5fc;border-color:#bbcee4}
+:root:not([data-theme="dark"]) :is(.two-column-search .wildcard .video-card,.two-column-search .related .video-card.is-wildcard){background:#fbf1f8;border-color:#cfabc3}
+:root:not([data-theme="dark"]) .two-column-search .wildcard .empty{background:#fbf1f8;border-color:#cfabc3}
+:root:not([data-theme="dark"]) .two-column-search .wildcard .stream-heading h3{color:#85436f}
+:root:not([data-theme="dark"]) .two-column-search .wildcard .stream-header{border-color:#ae7098}
+:root:not([data-theme="dark"]) :is(.feed-tabs [aria-pressed="true"],.feed-controls [aria-pressed="true"],.card-details .save-video[aria-pressed="true"]){background:#deebfa;border-color:#7e9fc5;color:#234e7b}
+:root:not([data-theme="dark"]) .archived-search{border-color:#ccd4de}
+:root:not([data-theme="dark"]) :is(#interpretation-status.analysis-active,.search-progress.analysis-active){background:#fff0ed;color:#9b343d;border-color:#cf9298}
+:root:not([data-theme="dark"]) .analysis-active .loading-spinner{border-top-color:#9b343d}
+:root:not([data-theme="dark"]) .analysis-active .loading-time{color:#874e55}
+@media(min-width:601px) and (max-width:900px){.topbar{height:auto;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}.topbar nav{min-height:36px;flex-wrap:wrap}}

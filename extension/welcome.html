@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--CSP-->
+  <title>Welcome to MyTube</title>
+  <link rel="stylesheet" href="welcome.css">
+  <script src="live.js" defer></script>
+  <script src="welcome.js" defer></script>
+</head>
+<body>
+  <main>
+    <header><span class="brand">MyTube</span><span class="badge">Personal preview</span><button id="theme-toggle" class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dark theme" title="Switch to dark theme"><svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5"/></svg><svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg></button></header>
+    <h1>Welcome to MyTube</h1>
+    <p class="intro">Open MyTube now, or finish connecting your accounts below.</p>
+    <section class="access-panel" aria-labelledby="access-title">
+      <div class="access-heading"><img src="icon-48.png" width="40" height="40" alt=""><h2 id="access-title">Your browser shortcut</h2><a class="primary" href="index.html">Open MyTube now</a></div>
+      <label for="browser-choice">Your browser</label>
+      <select id="browser-choice"><option value="chrome">Chrome</option><option value="edge">Microsoft Edge</option><option value="brave">Brave</option><option value="firefox">Firefox</option></select>
+      <ol id="pin-instructions" class="pin-steps" aria-label="Pin MyTube to your toolbar"></ol>
+      <details class="access-alternatives"><summary>Other ways to open MyTube</summary>
+      <p><strong>Keyboard:</strong> <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd>. To change it, open <code id="shortcut-settings"></code>. In Firefox, use the gear menu, then Manage Extension Shortcuts.</p>
+      <p><strong>Bookmark:</strong> open MyTube, then press <kbd>Ctrl</kbd> + <kbd>D</kbd> to save it in this browser.</p>
+      <div id="direct-access"><label for="mytube-address">MyTube address in this browser</label><input id="mytube-address" type="text" readonly spellcheck="false" aria-describedby="address-help"><p id="address-help">Select and copy this address to open MyTube in the same browser profile. A different browser needs its own installation.</p></div>
+      </details>
+      <details><summary>Missing from the Extensions menu?</summary>
+        <p>Paste <code id="browser-manager"></code> into the browser’s address bar.</p>
+        <p>If MyTube is listed, turn it on. If it is missing:</p><p id="install-instructions"></p>
+        <p id="firefox-reminder" hidden>Firefox’s temporary add-on disappears when Firefox closes. Load the same manifest again; avoid uninstalling it to preserve browser data.</p>
+        <p>After an update, reload the existing extension and reopen its tab. Do not remove it.</p>
+      </details>
+    </section>
+    <p id="unsupported" hidden>Open this guide from the installed MyTube extension to connect. The local companion requires Windows.</p>
+    <ol>
+      <li><h2>Connect this computer</h2>
+        <p>MyTube uses a local companion to keep your YouTube key protected on Windows and handle ChatGPT sign-in.</p>
+        <p id="companion-status" role="status">Checking the companion…</p>
+        <button id="check" type="button">Check connection</button>
+        <details id="companion-help"><summary>Set up the companion or fix the connection</summary>
+          <p>This preview still requires Node.js 22+ and the MyTube project folder. Open <strong>MyTube.cmd</strong> in that folder and leave it running.</p>
+          <p>When the launcher asks for the extension ID or Firefox connection address, use this value:</p>
+          <code id="extension-id"></code>
+          <button id="copy-identity" type="button" class="secondary">Copy connection ID</button><p id="copy-status" role="status"></p>
+          <p>This identifies this browser installation; it is not an API key. If the launcher already remembers a different browser or ID, close it and run <code>npm start -- --configure</code> from the project folder. Only the configured browser installation can connect at a time.</p>
+          <p>In Firefox, allow the requested site permissions for MyTube in the add-on settings. If you reinstall the add-on or change profiles, configure the launcher again with the address shown here.</p>
+        </details>
+      </li>
+      <li><h2>Connect YouTube</h2>
+        <p>Your personal API key enables YouTube searches. Enter it only in the protected Windows window.</p>
+        <p id="youtube-status" role="status">Waiting for the companion.</p>
+        <button id="youtube" type="button" disabled>Connect YouTube</button>
+        <details><summary>Get a personal YouTube key</summary>
+          <p>In <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noreferrer">Google Cloud</a>, select or create a project and enable YouTube Data API v3. Under Credentials, create an API key and restrict it to YouTube Data API v3. Save it in the Windows window, then check the connection again.</p>
+          <p>The key stays on this computer. A saved key still needs a successful search to confirm Google accepts it.</p>
+        </details>
+      </li>
+      <li><h2>Sign in to ChatGPT</h2>
+        <p>ChatGPT helps interpret your request. This sign-in is separate from your YouTube key; your account must have access to the service MyTube uses.</p>
+        <p id="chatgpt-status" role="status">Sign in when the companion is connected.</p>
+        <button id="chatgpt" type="button" disabled>Sign in to ChatGPT</button>
+        <button id="cancel" type="button" hidden>Cancel sign-in</button>
+      </li>
+    </ol>
+    <footer><a class="primary" href="index.html">Open MyTube</a><p>Your searches and preferences stay in this browser. Optional subscriptions require separate Google consent. You can reopen this guide from the extension’s options.</p></footer>
+  </main>
+</body>
+</html>

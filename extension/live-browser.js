@@ -12,7 +12,7 @@ import { refreshHomeTopics } from './home-refresh.mjs';
 import { watchAuthorization } from './auth-window.mjs';
 
 // Browser entry point. The bundle keeps provider state inside a private scope.
-const api = globalThis.chrome;
+const api = globalThis.browser ?? globalThis.chrome;
 const googleGate = createGoogleGate();
 const legacyVideoDurations = createVideoDurationLoader({ getToken: () => getGoogleToken(api, false) });
 let localKeyConfigured = false;
@@ -30,7 +30,6 @@ function legacyStatus() {
 }
 function status() {
   const extensionId = api?.runtime?.id ?? null;
-  if (api?.runtime?.getManifest?.()?.browser_specific_settings?.gecko) return { ready: false, reason: 'BROWSER_AUTH_UNSUPPORTED', extensionId };
   return { ready: Boolean(extensionId), reason: extensionId ? null : 'EXTENSION_REQUIRED', extensionId, provider: 'chatgpt_web' };
 }
 async function search(query, signal) {

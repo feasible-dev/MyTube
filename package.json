@@ -1,6 +1,6 @@
 {
   "name": "mytube",
-  "version": "0.8.44",
+  "version": "0.8.51",
   "private": true,
   "type": "module",
   "description": "Personal video discovery with a browser extension and a local connector.",
@@ -15,6 +15,7 @@
     "test:a1": "node --test spikes/a1-openai-login/a1.test.mjs",
     "poc:build": "node poc/build.mjs",
     "extension:build": "node extension/build.mjs",
+    "extension:package": "node scripts/package-extension.mjs",
     "check:extension": "node scripts/check.mjs extension",
     "a1": "node --test spikes/a1-openai-login/a1.test.mjs && node spikes/a1-openai-login/login.mjs",
     "test:b1": "node --test spikes/b1-youtube-candidates/b1.test.mjs spikes/b1-youtube-candidates/assessment.test.mjs",

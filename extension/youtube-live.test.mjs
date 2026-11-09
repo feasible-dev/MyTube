@@ -218,6 +218,10 @@ test('browser adapter blocks unconfigured and Firefox clients and ignores late s
   const withoutGoogle = make({}, { chrome: { runtime: { getManifest: () => ({}), id: 'local-test-id' } } });
   assert.equal(withoutGoogle.status().ready, true, 'Default web discovery does not need Google OAuth or identity');
   assert.equal(withoutGoogle.status().provider, 'chatgpt_web');
+  const firefox = make({}, { chrome: undefined, browser: { runtime: { id: 'mytube@test.invalid', getManifest: () => ({ browser_specific_settings: { gecko: {} } }) } } });
+  assert.equal(firefox.status().ready, true);
+  assert.equal(firefox.status().provider, 'chatgpt_web');
+  await assert.rejects(firefox.subscriptions(), { code: 'BROWSER_AUTH_UNSUPPORTED' });
   await assert.rejects(make({ browser_specific_settings: { gecko: {} } }).search('test'), { code: 'BROWSER_AUTH_UNSUPPORTED' });
   let finishAuth;
   const client = make({ oauth2: { client_id: 'public-id' } }, { chrome: { runtime: { getManifest: () => ({ oauth2: { client_id: 'public-id' } }), id: 'local-test-id' },

@@ -37,6 +37,13 @@ test('extension builds and its packages pass checks without experiments, private
     assert.equal(manifest.permissions, undefined);
     assert.ok(manifest.host_permissions.includes('http://127.0.0.1/*'));
     assert.ok(manifest.content_security_policy.extension_pages.includes('https://vimeo.com'));
+    // A distribution build must ignore even an existing machine-specific client.
+    await (await import('node:fs/promises')).writeFile(join(directory, 'extension/google-client.json'), JSON.stringify({ client_id: '123-synthetic.apps.googleusercontent.com' }));
+    await promisify(execFile)(process.execPath, ['extension/build.mjs', '--distribution'], { cwd: directory });
+    const distribution = JSON.parse(await readFile(join(directory, 'dist/distribution/brave/manifest.json'), 'utf8'));
+    assert.equal(distribution.oauth2, undefined);
+    assert.equal(distribution.permissions, undefined);
+    assert.equal(distribution.options_ui.page, 'welcome.html');
   } finally {
     const child = relative(resolve(workspace), resolve(directory));
     assert.ok(child.startsWith('.mytube-clean-build-') && !child.startsWith('..') && !isAbsolute(child));

@@ -1,5 +1,63 @@
 # MyTube release notes
 
+## Clearer browser setup: 0.8.51
+
+The welcome guide presents toolbar setup as three short numbered steps. Opening
+MyTube stays prominent; keyboard shortcuts, bookmarks and troubleshooting move
+into expandable sections. Firefox guidance no longer appears as a wall of text.
+
+## Browser installation and access guide: 0.8.50
+
+Added a standalone Install MyTube.html guide and browser-aware welcome instructions
+for Chrome, Edge, Brave and Firefox. Users can open MyTube immediately, learn to
+pin its icon, bookmark its page or use the suggested Alt+Shift+M shortcut. The
+welcome guide offers connection-ID copying and opens troubleshooting when the
+companion is unreachable. Settings links back to setup and browser access.
+
+## Consistent card dimensions and blue icon: 0.8.49
+
+All video cards reserve the same title, metadata and action-row space, removing
+the extra height of wildcard cards. The extension icon now uses a navy play mark
+on a pale blue tile in every size and browser package.
+
+## Firefox companion support: 0.8.48
+
+Firefox now uses its browser API, network permissions and exact profile-specific
+extension origin for companion connection, ChatGPT sign-in and discovery. Setup
+accepts and remembers the connection address shown in the welcome guide while
+preserving strict Host and Origin checks. Browser history/preferences persist in
+Firefox too. Optional Google subscriptions remain Chromium-only.
+
+Distribution packaging emits a separate unsigned Firefox ZIP. An isolated real
+Firefox smoke test exercises installation, loopback requests, synthetic discovery
+and theme persistence without reading credentials. Real provider login/search and
+Mozilla signing remain unverified/pending.
+
+## Sun/moon theme switch: 0.8.47
+
+Replaced the text theme button with a compact sun/moon switch and sliding circular
+thumb on both pages. The switch exposes its state to screen readers, supports
+keyboard activation and respects reduced-motion preferences.
+
+## Light and dark appearance: 0.8.46
+
+The main page and welcome guide now have a header button to switch between light
+and dark themes. Light is the default until a choice is saved. Theme preference
+persists independently of search history and synchronizes between open pages.
+Cards, dialogs, settings and discovery status surfaces support both palettes.
+
+## In-extension welcome and distribution candidate: 0.8.45
+
+New installations open a packaged welcome guide; Extension options reopens it.
+The guide checks the local companion, explains key setup, launches the protected
+Windows key window, and supports ChatGPT sign-in with cancellation. Updates do
+not reopen onboarding. The extension now has original packaged toolbar icons.
+
+`npm run extension:package` creates a Chrome ZIP from verified generated assets,
+without reading local Google registration or archiving the repository. It does
+not publish anything or install the companion. The development preview still
+requires Node.js, a running launcher and a configured extension ID.
+
 ## Setup guidance and quota clarity: 0.8.44
 
 The native key window links directly to API enablement and key management. Setup

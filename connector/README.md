@@ -2,7 +2,9 @@
 
 The Node.js connector listens only on `127.0.0.1:43817`. Start it with
 `npm run connector`; stop it with Ctrl+C. Set `MYTUBE_EXTENSION_ID` to your
-installed Chromium extension ID. See the [installation guide](../README.md).
+installed Chromium extension ID or the exact `moz-extension://...` address shown
+in Firefox's MyTube welcome guide. `npm start -- --configure` remembers this value.
+Exactly one browser installation is trusted at a time. See the [installation guide](../README.md).
 
 ## Responsibilities
 

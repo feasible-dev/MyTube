@@ -7,10 +7,10 @@ export function readClientId(config) {
   return config.client_id;
 }
 export function liveManifestSettings(clientId, target) {
-  const enabled = target === 'brave';
+  const enabled = target === 'brave' || target === 'firefox';
   const policy = `default-src 'none'; script-src 'self'; style-src 'self'; img-src data:${enabled ? ' https://i.ytimg.com https://yt3.ggpht.com https://yt3.googleusercontent.com ' + THUMBNAIL_ORIGINS.join(' ') : ''}; connect-src ${enabled ? 'https://www.googleapis.com http://127.0.0.1:43817 ' + PREVIEW_ORIGINS.join(' ') : "'none'"}; object-src 'none'; base-uri 'none'; form-action 'none'`;
   return { policy, additions: enabled ? {
     host_permissions: ['https://www.googleapis.com/*', 'http://127.0.0.1/*', ...PREVIEW_ORIGINS.map(origin => origin + '/*')],
-    ...(clientId ? { permissions: ['identity'], oauth2: { client_id: clientId, scopes: ['https://www.googleapis.com/auth/youtube.readonly'] } } : {}),
+    ...(clientId && target === 'brave' ? { permissions: ['identity'], oauth2: { client_id: clientId, scopes: ['https://www.googleapis.com/auth/youtube.readonly'] } } : {}),
   } : {} };
 }
