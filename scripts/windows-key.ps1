@@ -51,11 +51,18 @@ try {
     $help.Text = "Need a key? In Google Cloud:`n`n1. Create or select a project.`n2. APIs & Services > Library: enable YouTube Data API v3.`n3. Credentials > Create credentials > API key.`n4. Restrict key > API restrictions: choose YouTube Data API v3.`n5. Copy the key, come back here, and paste it below."
     $help.SetBounds(20,65,560,145)
     $cloud = New-Object Windows.Forms.LinkLabel
-    $cloud.Text = 'Open Google Cloud'
+    $cloud.Text = '1. Enable YouTube Data API v3'
     $cloud.SetBounds(20,215,250,25)
     $cloud.Add_LinkClicked({
-        try { Start-Process -FilePath 'https://console.cloud.google.com/apis/credentials' }
+        try { Start-Process -FilePath 'https://console.cloud.google.com/apis/library/youtube.googleapis.com' }
         catch { $status.Text = 'Open console.cloud.google.com in your browser.' }
+    })
+    $credentials = New-Object Windows.Forms.LinkLabel
+    $credentials.Text = '2. Create or find your API key'
+    $credentials.SetBounds(300,215,280,25)
+    $credentials.Add_LinkClicked({
+        try { Start-Process -FilePath 'https://console.cloud.google.com/apis/credentials' }
+        catch { $status.Text = 'Open console.cloud.google.com/apis/credentials in your browser.' }
     })
     $input = New-Object Windows.Forms.TextBox
     $input.UseSystemPasswordChar = $true
@@ -98,7 +105,7 @@ try {
             $cancel.Text = 'Close'
         } catch { $input.Clear(); $status.Text = 'Could not save securely. Your previous key was preserved.' }
     })
-    $form.Controls.AddRange(@($label,$help,$cloud,$input,$status,$save,$cancel))
+    $form.Controls.AddRange(@($label,$help,$cloud,$credentials,$input,$status,$save,$cancel))
     $form.AcceptButton = $save
     $form.CancelButton = $cancel
     try { [void]$form.ShowDialog() } finally { $input.Clear(); $form.Dispose() }

@@ -51,8 +51,11 @@ folder, and open PowerShell there:
 npm.cmd run setup
 ```
 
-The native Windows dialog has a masked field. Paste the key and click **Encrypt and
-save**. Only **Key saved** confirms storage; merely opening
+The native Windows dialog has a masked field. Paste the key and click **Save key**.
+Its two links open API enablement and key management in Google Cloud. Select the
+same project in both pages. You can reuse an existing key with the correct API
+restriction; MyTube does not search personal files or collect Google credentials.
+Only **Key saved** confirms storage; merely opening
 that window does not save a key or validate it with Google.
 
 Windows DPAPI CurrentUser encrypts the key in
@@ -114,6 +117,35 @@ Public video metadata expires after 30 days; request text persists until cleared
 The small working cache is not the full archive. Preferences and channel bans are
 independent. Removing the extension or clearing browser storage can erase data.
 No shared SQLite service is involved.
+
+## Search budget and results
+
+MyTube starts with three YouTube `search.list` requests, combining search angles
+with OR. After those and the web results arrive, a column with fewer than six
+selectable videos can receive an additional search. At most two columns receive
+this extra call: the total ceiling is **five YouTube search calls per search**.
+Cancellation or provider errors can reduce this number. Repeating a search spends
+quota again; scrolling through already received results does not.
+
+Google currently allocates **100 search.list calls per project per day** by default.
+Budget for **20 MyTube searches at the full five-call cost**, or up to 33 if each
+uses only three calls and nothing else consumes that project's search quota.
+This is not a fixed MyTube daily limit. Failed requests and other applications
+using the same project can reduce the available budget. Quotas reset at midnight
+Pacific Time; the project's Google Cloud Quotas page is authoritative.
+
+Video duration and channel metadata require additional API requests, charged to
+Google's separate quota for other endpoints (10,000 units/day by default).
+ChatGPT interpretation and web discovery have separate availability and limits.
+Five is therefore the search-call ceiling, not the total number of network calls.
+
+A broad search can produce around 40 suggestions across the three columns, but
+this is not guaranteed. Relevance, language, duration, duplicates, channel limits
+and bans reduce the final selection. The initial page shows up to eight per column;
+scrolling reveals more received results. Narrow subjects can yield far fewer.
+
+Checked November 8, 2026 against Google's [quota documentation](https://developers.google.com/youtube/data/determine_quota_cost)
+and [search.list reference](https://developers.google.com/youtube/data/reference/rest/v3/search/list).
 
 ## Updates and troubleshooting
 

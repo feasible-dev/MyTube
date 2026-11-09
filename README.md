@@ -12,4 +12,6 @@ Find videos on your topic, related subjects, and unexpected discoveries.
 
 **Next time:** double-click **MyTube.cmd**. Your key and extension ID are remembered.
 
+**Daily budget:** up to 5 YouTube search calls per search: budget for 20 searches/day on Google's default quota. Broad searches can yield around 40 suggestions; results vary. [Quota details](agents.markdown#search-budget-and-results).
+
 Development preview: Chrome extension + local helper. [Details and troubleshooting](agents.markdown).

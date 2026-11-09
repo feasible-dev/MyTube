@@ -1,5 +1,12 @@
 # MyTube release notes
 
+## Setup guidance and quota clarity: 0.8.44
+
+The native key window links directly to API enablement and key management. Setup
+instructions consistently use Save key; Windows protection remains automatic.
+The quick start and handbook distinguish the five-search-call ceiling from
+metadata calls, explain the daily budget, and avoid guaranteeing result counts.
+
 ## One launcher: 0.8.43
 
 Double-click MyTube.cmd to install on first use and start on later visits. Missing
